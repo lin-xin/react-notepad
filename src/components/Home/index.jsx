@@ -3,6 +3,7 @@ import AppHeader from '../Header/index';
 import AppInput from '../Input/index';
 import AppList from '../List/index';
 import Sidebar from '../Sidebar/index';
+import AppFooter from '../Footer/index';
 
 class App extends Component{
     render(){
@@ -14,6 +15,7 @@ class App extends Component{
                     <AppList/>
                     <Sidebar/>
                 </section >
+                <AppFooter/>
             </div>
         )
     }
