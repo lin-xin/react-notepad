@@ -8,7 +8,7 @@ import AppFooter from '../Footer/index';
 class App extends Component{
     render(){
         return (
-            <div>
+            <div className="blue">
                 <AppHeader/>
                 <section className="container">
                     <AppInput/>
