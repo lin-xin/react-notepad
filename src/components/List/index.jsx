@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addevent } from '../../store/app/action';
 import getDate from '../../utils/date';
 import './style.less';
 
@@ -74,27 +76,27 @@ class AppList extends Component{
         }
         return (
             <div className="event-content">
-                <ListType type={1} data={this.state.data}/>
-                <ListType type={2} data={this.state.data}/>
-                <ListType type={3} data={this.state.data}/>
+                <ListType type={1} data={this.props.app.event}/>
+                <ListType type={2} data={this.props.app.event}/>
+                <ListType type={3} data={this.props.app.event}/>
             </div>
         )
     }
     handleChangeType = (id, type) => {
-        const data = this.state.data;
-        for (let i = 0, len = data.length; i < len; i++) {
-            if(data[i].id === id){
-                data[i].type = type;
-            }
-            if(type === 2){
-                data[i].time = getDate(new Date());
-            }
-        }
-        this.setState({
-            data
-        })
+        // const data = this.props.app.event;
+        // for (let i = 0, len = data.length; i < len; i++) {
+        //     if(data[i].id === id){
+        //         data[i].type = type;
+        //     }
+        //     if(type === 2){
+        //         data[i].time = getDate(new Date());
+        //     }
+        // }
+        // this.setState({
+        //     data
+        // })
     }
 }
 
 
-export default AppList;
+export default connect(state=>({app: state.app}), {addevent})(AppList);
