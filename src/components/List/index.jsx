@@ -1,50 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addevent } from '../../store/app/action';
-import getDate from '../../utils/date';
+import { changetype } from '../../store/app/action';
 import './style.less';
 
 
 class AppList extends Component{
-    state = {
-        data : [
-            {
-                id: 1,
-                type: 1,
-                content: '哈哈哈哈'
-            },
-            {
-                id: 2,
-                type: 1,
-                content: 'sdasd'
-            },
-            {
-                id: 3,
-                type: 3,
-                content: '哈哈哈fdgfgd哈'
-            },
-            {
-                id: 4,
-                type: 1,
-                content: '哈哈上谁水水水水是'
-            }
-        ]
-    }
     render(){
         const ListContent = (props) => {
             return props.data.map(item => {
                 if(props.type === 1 && item.type === 1){
                     return (
                         <li className="event-list" key={item.id}>
-                            <input type="checkbox" onClick={id => {this.handleChangeType(item.id, 2)}}/>
+                            <input type="checkbox" onClick={id => {this.props.changetype(item.id, 2)}}/>
                             <div>{item.content}</div>
-                            <button className="cancel-btn" onClick={id => {this.handleChangeType(item.id, 3)}}>取消</button>
+                            <button className="cancel-btn" onClick={id => {this.props.changetype(item.id, 3)}}>取消</button>
                         </li>
                     )
                 }else if(props.type === 2 && item.type === 2){
                     return (
                         <li className="event-list" key={item.id}>
-                            <input type="checkbox" defaultChecked onClick={id => {this.handleChangeType(item.id, 1)}}/>
+                            <input type="checkbox" defaultChecked onClick={id => {this.props.changetype(item.id, 1)}}/>
                             <div>{item.content}</div>
                             <span className="event-time">{item.time}</span>
                         </li>
@@ -53,7 +28,7 @@ class AppList extends Component{
                     return (
                         <li className="event-list" key={item.id}>
                             <div className="event-delete">{item.content}</div>
-                            <button className="cancel-btn" onClick={id => {this.handleChangeType(item.id, 1)}}>恢复</button>
+                            <button className="cancel-btn" onClick={id => {this.props.changetype(item.id, 1)}}>恢复</button>
                         </li>
                     )
                 }
@@ -82,21 +57,7 @@ class AppList extends Component{
             </div>
         )
     }
-    handleChangeType = (id, type) => {
-        // const data = this.props.app.event;
-        // for (let i = 0, len = data.length; i < len; i++) {
-        //     if(data[i].id === id){
-        //         data[i].type = type;
-        //     }
-        //     if(type === 2){
-        //         data[i].time = getDate(new Date());
-        //     }
-        // }
-        // this.setState({
-        //     data
-        // })
-    }
 }
 
 
-export default connect(state=>({app: state.app}), {addevent})(AppList);
+export default connect(state=>({app: state.app}), {changetype})(AppList);
