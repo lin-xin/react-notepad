@@ -1,10 +1,26 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { changetype } from '../../store/app/action';
 import './style.less';
 
-
-class AppList extends Component{
+class ListType extends Component{
+    state = {
+        toggle: [
+            {
+                show: true,
+                style: {height: 'auto', display: 'block'}
+            },
+            {
+                show: true,
+                style: {height: 'auto', display: 'block'}
+            },
+            {
+                show: true,
+                style: {height: 'auto', display: 'block'}
+            }
+        ]
+    }
     render(){
         const ListContent = (props) => {
             return props.data.map(item => {
@@ -34,21 +50,53 @@ class AppList extends Component{
                 }
             })
         }
-        
-        const ListType = (props) => {
-            return (
-                <div>
-                    <div className="event-tab">{props.type===1?'未完成':(props.type===2?'已完成':'已取消')}
-                        <span></span>
-                    </div>
-                    <div className="event-box">
-                        <ul>
-                            <ListContent data={props.data} type={props.type}/>
-                        </ul>
-                    </div>
+        return (
+            <div>
+                <div className="event-tab" onClick={(e)=>{this.toggleTab(this.props.type-1, e)}}>{this.props.type===1?'未完成':(this.props.type===2?'已完成':'已取消')}
+                    <span className={!this.state.toggle[this.props.type-1].show && 'close-span'}></span>
                 </div>
-            )
-        }
+                <div className="event-box" style={this.state.toggle[this.props.type-1].style}>
+                    <ul>
+                        <ListContent data={this.props.data} type={this.props.type}/>
+                    </ul>
+                </div>
+            </div>
+        )
+    }
+    toggleTab = (num, event) => {
+        const toggle = this.state.toggle;
+        const tab = toggle[num];
+        tab.show ? this.closeTab(event) : this.openTab( event);
+        tab.show = !tab.show;
+        toggle[num] = tab;
+        this.setState({
+            toggle
+        })
+    }
+    openTab = (event) => {
+        let ulElement = event.currentTarget.nextElementSibling;
+        let children = ulElement.getElementsByTagName('ul')[0];
+        ulElement.style.display = 'block';
+        ulElement.style.height = children.offsetHeight + 'px';
+        setTimeout(function () {
+            ulElement.style.height = 'auto';
+        }, 300)
+    }
+    closeTab = (event) => {
+        let ulElement = event.currentTarget.nextElementSibling;
+        let children = ulElement.getElementsByTagName('ul')[0];
+        ulElement.style.height = children.offsetHeight + 'px';
+        setTimeout(() => {
+            ulElement.style.height = '0px';
+            setTimeout(() => {
+                ulElement.style.display = 'none';
+            }, 300)
+        },10)
+    }
+}
+
+class AppList extends Component{
+    render(){
         return (
             <div className="event-content">
                 <ListType type={1} data={this.props.app.event}/>
@@ -58,6 +106,5 @@ class AppList extends Component{
         )
     }
 }
-
 
 export default connect(state=>({app: state.app}), {changetype})(AppList);
