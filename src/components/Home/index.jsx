@@ -6,6 +6,7 @@ import AppList from '../List/index';
 import Sidebar from '../Sidebar/index';
 import AppTheme from '../Theme/index';
 import AppFooter from '../Footer/index';
+import AppDialog from '../Dialog/index';
 
 class App extends Component{
     render(){
@@ -18,6 +19,7 @@ class App extends Component{
                     <Sidebar/>
                 </section >
                 <AppTheme/>
+                <AppDialog type="upload"/>
                 <AppFooter/>
             </div>
         )

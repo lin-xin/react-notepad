@@ -12,7 +12,7 @@ class Sidebar extends Component{
                         <button className="tools-btn" onClick={this.handleChange}>切换主题</button>
                     </li>
                     <li>
-                        <button className="tools-btn">下载数据</button>
+                        <button className="tools-btn" onClick={this.handleDownload}>下载数据</button>
                     </li>
                     <li>
                         <button className="tools-btn">导入数据</button>
@@ -30,6 +30,14 @@ class Sidebar extends Component{
     handleChange = () => {
         this.props.collapse(false);
         this.props.handletheme(true);
+    }
+    handleDownload = () => {
+        const aTag = document.createElement('a');
+        const blob = new Blob([localStorage.getItem('react_notepad')]);
+        aTag.download = 'notepad.txt';
+        aTag.href = URL.createObjectURL(blob);
+        aTag.click();
+        URL.revokeObjectURL(blob);
     }
 }
 
