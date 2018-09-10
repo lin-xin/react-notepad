@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { changeVisible, changeType } from '../../store/dialog/action';
+import { clearevent } from '../../store/app/action';
 import './style.less'
 
 const DialogContent = (props) => {
@@ -55,8 +56,16 @@ class AppDialog extends Component {
     }
     handleSure = () => {
         this.props.changeVisible(false);
+        switch (this.props.dialog.type) {
+            case 'clear':
+                this.props.clearevent();
+                break;
+            
+            default:
+                break;
+        }
         this.props.changeType('');
     }
 }
 
-export default connect(state=>({dialog: state.dialog}), {changeVisible, changeType})(AppDialog);
+export default connect(state=>({dialog: state.dialog}), {changeVisible, changeType, clearevent})(AppDialog);

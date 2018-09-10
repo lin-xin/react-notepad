@@ -12,3 +12,9 @@ export const changetype = (id, type) => {
         eventType: type
     }
 }
+
+export const clearevent = () => {
+    return {
+        type: 'CLEAREVENT'
+    }
+}
