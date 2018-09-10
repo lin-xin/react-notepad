@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { changetype } from '../../store/app/action';
 import './style.less';
@@ -99,9 +98,9 @@ class AppList extends Component{
     render(){
         return (
             <div className="event-content">
-                <ListType type={1} data={this.props.app.event}/>
-                <ListType type={2} data={this.props.app.event}/>
-                <ListType type={3} data={this.props.app.event}/>
+                <ListType type={1} data={this.props.app.event} changetype={this.props.changetype}/>
+                <ListType type={2} data={this.props.app.event} changetype={this.props.changetype}/>
+                <ListType type={3} data={this.props.app.event} changetype={this.props.changetype}/>
             </div>
         )
     }

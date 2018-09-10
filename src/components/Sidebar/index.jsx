@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { collapse, handletheme } from '../../store/sidebar/action';
+import { changeVisible, changeType } from '../../store/dialog/action';
 import './style.less';
 
 class Sidebar extends Component{
@@ -21,7 +22,7 @@ class Sidebar extends Component{
                         <button className="tools-btn">编辑数据</button>
                     </li>
                     <li>
-                        <button className="tools-btn">清空数据</button>
+                        <button className="tools-btn" onClick={this.handleClear}>清空数据</button>
                     </li>
                 </ul>
             </div>
@@ -39,6 +40,11 @@ class Sidebar extends Component{
         aTag.click();
         URL.revokeObjectURL(blob);
     }
+    handleClear = () => {
+        this.props.changeVisible(true);
+        this.props.collapse(false);
+        this.props.changeType('clear');
+    }
 }
 
-export default connect(state=>({sidebar: state.sidebar}), {collapse, handletheme})(Sidebar);
+export default connect(state=>({sidebar: state.sidebar}), {collapse, handletheme, changeVisible, changeType})(Sidebar);

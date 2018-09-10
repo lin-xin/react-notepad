@@ -19,11 +19,11 @@ class App extends Component{
                     <Sidebar/>
                 </section >
                 <AppTheme/>
-                <AppDialog type="upload"/>
+                {this.props.dialog.show && <AppDialog/>}
                 <AppFooter/>
             </div>
         )
     }
 }
 
-export default connect(state=>({sidebar: state.sidebar}))(App);
+export default connect(state=>({sidebar: state.sidebar, dialog: state.dialog}))(App);
