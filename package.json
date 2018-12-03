@@ -95,6 +95,7 @@
   },
   "devDependencies": {
     "less": "^3.8.1",
-    "less-loader": "^4.1.0"
+    "less-loader": "^4.1.0",
+    "merge": "^1.2.1"
   }
 }
