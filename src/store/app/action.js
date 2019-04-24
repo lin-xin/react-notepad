@@ -18,3 +18,10 @@ export const clearevent = () => {
         type: 'CLEAREVENT'
     }
 }
+
+export const uploadevent = (value) => {
+    return {
+        type: 'UPLOADEVENT',
+        content: value
+    }
+}

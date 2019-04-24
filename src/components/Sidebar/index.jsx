@@ -16,10 +16,10 @@ class Sidebar extends Component{
                         <button className="tools-btn" onClick={this.handleDownload}>下载数据</button>
                     </li>
                     <li>
-                        <button className="tools-btn">导入数据</button>
+                        <button className="tools-btn" onClick={this.handleUpload}>导入数据</button>
                     </li>
                     <li>
-                        <button className="tools-btn">编辑数据</button>
+                        <button className="tools-btn" onClick={this.handleEdit}>编辑数据</button>
                     </li>
                     <li>
                         <button className="tools-btn" onClick={this.handleClear}>清空数据</button>
@@ -44,6 +44,15 @@ class Sidebar extends Component{
         this.props.changeVisible(true);
         this.props.collapse(false);
         this.props.changeType('clear');
+    }
+    handleUpload = () => {
+        this.props.changeVisible(true);
+        this.props.collapse(false);
+        this.props.changeType('upload');
+    }
+    handleEdit = () => {
+        this.props.collapse(false);
+        this.props.changeType('edit');
     }
 }
 

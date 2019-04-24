@@ -48,9 +48,13 @@ export default (state = defaultState, action) => {
         case 'CHANGETYPE':
             return changeType(state, action);
         case 'CLEAREVENT':
-            const newState = {...state, ...{event: []}};
+            const newState = {...state, ...{event: [], count: 0}};
             storage.set(newState);
             return newState;
+        case 'UPLOADEVENT':
+            const uploadState = {...state, ...action.content};
+            storage.set(uploadState);
+            return uploadState;
         default:
             return state;
     }
