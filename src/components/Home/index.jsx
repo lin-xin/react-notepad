@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import AppHeader from '../Header/index';
 import AppInput from '../Input/index';
 import AppList from '../List/index';
+import AppTable from '../Table/index';
 import Sidebar from '../Sidebar/index';
 import AppTheme from '../Theme/index';
 import AppFooter from '../Footer/index';
@@ -18,6 +19,7 @@ class App extends Component{
                     <AppList/>
                     <Sidebar/>
                 </section >
+                <AppTable/>
                 <AppTheme/>
                 {this.props.dialog.show && <AppDialog/>}
                 <AppFooter/>
